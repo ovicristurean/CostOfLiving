@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                     {
                       BlocProvider.of<LocationsBloc>(context)
                           .requestLocations();
-                      return Text("Locations loading");
+                      return const Text("Locations loading");
                     }
 
                   default:
