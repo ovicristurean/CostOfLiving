@@ -1,4 +1,6 @@
 import 'package:cost_of_living/presentation/screens/home_screen.dart';
+import 'package:cost_of_living/ui_util/theme.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,21 +13,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+    final settings = ValueNotifier(ThemeSettings(
+      sourceColor: Colors.pink,
+      themeMode: ThemeMode.system,
+    ));
+
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) =>
+          ThemeProvider(
+        settings: settings,
+        lightDynamic: lightDynamic,
+        darkDynamic: darkDynamic,
+        child: ValueListenableBuilder(
+            valueListenable: settings,
+            builder: (context, value, _) {
+              final theme = ThemeProvider.of(context);
+              return MaterialApp(
+                title: 'Flutter Demo',
+                theme: theme.light(settings.value.sourceColor),
+                darkTheme: theme.dark(settings.value.sourceColor),
+                themeMode: theme.themeMode(),
+                home: const MyHomePage(title: 'Flutter Demo Home Page'),
+              );
+            }),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

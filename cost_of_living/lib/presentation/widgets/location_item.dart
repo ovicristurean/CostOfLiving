@@ -15,7 +15,6 @@ class _LocationItemState extends State<LocationItem> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Colors.amber,
       child: SizedBox(
         width: 300,
         height: 100,
