@@ -1,17 +1,24 @@
+import 'package:cost_of_living/presentation/model/location_view_data.dart';
+import 'package:cost_of_living/presentation/widgets/location_item.dart';
 import 'package:flutter/material.dart';
 
-class LocationsList extends StatelessWidget {
-  const LocationsList({Key? key}) : super(key: key);
+class LocationsList extends StatefulWidget {
+  final List<LocationViewData> elements;
+
+  const LocationsList({Key? key, required this.elements}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var elements = ["one", "two", "three"];
+  State<LocationsList> createState() => _LocationsListState();
+}
 
+class _LocationsListState extends State<LocationsList> {
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: elements.length,
+      itemCount: widget.elements.length,
       itemBuilder: (context, index) {
-        return Text(elements[index]);
+        return LocationItem(location: widget.elements[index]);
       },
     );
   }
