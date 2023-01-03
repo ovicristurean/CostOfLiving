@@ -1,5 +1,5 @@
 import 'package:cost_of_living/data/model/location.dart';
-import 'package:cost_of_living/domain/model/city_model.dart';
+import 'package:cost_of_living/domain/model/location_model.dart';
 
 LocationModel toModel(Location city) {
   return LocationModel(

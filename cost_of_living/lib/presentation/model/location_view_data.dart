@@ -1,4 +1,4 @@
-import 'package:cost_of_living/domain/model/city_model.dart';
+import 'package:cost_of_living/domain/model/location_model.dart';
 
 class LocationViewData {
   final String cityName;
