@@ -49,5 +49,8 @@ class LocationViewData {
   }
 }
 
+List<LocationViewData> toViewDataList(List<LocationModel> locationModels) =>
+    locationModels.map((e) => toViewData(e)).toList();
+
 LocationViewData toViewData(LocationModel locationModel) => LocationViewData(
     cityName: locationModel.cityName, countryName: locationModel.countryName);

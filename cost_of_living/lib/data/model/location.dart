@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 class Location {
   final int cityId;
   final String cityName;
   final String countryName;
-  final Long latitude;
-  final Long longitude;
+  final double latitude;
+  final double longitude;
   final String? stateCode;
 
   const Location({
@@ -39,15 +37,23 @@ class Location {
       stateCode.hashCode;
 
   @override
-  String toString() =>
-      'City{ cityId: $cityId, cityName: $cityName, countryName: $countryName, latitude: $latitude, longitude: $longitude, stateCode: $stateCode,}';
+  String toString() {
+    return 'Location{' +
+        ' cityId: $cityId,' +
+        ' cityName: $cityName,' +
+        ' countryName: $countryName,' +
+        ' latitude: $latitude,' +
+        ' longitude: $longitude,' +
+        ' stateCode: $stateCode,' +
+        '}';
+  }
 
   Location copyWith({
     int? cityId,
     String? cityName,
     String? countryName,
-    Long? latitude,
-    Long? longitude,
+    double? latitude,
+    double? longitude,
     String? stateCode,
   }) {
     return Location(
@@ -73,12 +79,12 @@ class Location {
 
   factory Location.fromMap(Map<String, dynamic> map) {
     return Location(
-      cityId: map['cityId'] as int,
-      cityName: map['cityName'] as String,
-      countryName: map['countryName'] as String,
-      latitude: map['latitude'] as Long,
-      longitude: map['longitude'] as Long,
-      stateCode: map['stateCode'] as String,
+      cityId: map['city_id'] as int,
+      cityName: map['city_name'] as String,
+      countryName: map['country_name'] as String,
+      latitude: map['lat'].toDouble(),
+      longitude: map['lng'].toDouble(),
+      stateCode: map['state_code'] as String?,
     );
   }
 }
