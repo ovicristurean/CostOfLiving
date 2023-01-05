@@ -1,10 +1,12 @@
 import 'package:cost_of_living/domain/bloc/LocationsBloc.dart';
 import 'package:cost_of_living/domain/bloc/state/locations_state.dart';
+import 'package:cost_of_living/presentation/widgets/locations_error_view.dart';
 import 'package:cost_of_living/presentation/widgets/locations_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/repository/LocationsRepositoryImpl.dart';
+import '../widgets/locations_loading_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,15 +20,15 @@ class HomeScreen extends StatelessWidget {
             LocationsBloc(context.read<LocationsRepositoryImpl>()),
         child: Container(
           color: Colors.white,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  "List of locations",
-                  textAlign: TextAlign.center,
-                ),
-                BlocBuilder<LocationsBloc, LocationsState>(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "List of locations",
+                textAlign: TextAlign.center,
+              ),
+              Expanded(
+                child: BlocBuilder<LocationsBloc, LocationsState>(
                   builder: (context, state) {
                     switch (state.runtimeType) {
                       case LocationsFetched:
@@ -38,21 +40,21 @@ class HomeScreen extends StatelessWidget {
                         {
                           BlocProvider.of<LocationsBloc>(context)
                               .requestLocations();
-                          return const Text("Locations loading");
+                          return const LocationsLoadingView(
+                              message: "Loading locations");
                         }
 
                       case LocationsError:
-                        {
-                          return Text((state as LocationsError).error);
-                        }
+                        return LocationsErrorView(
+                            message: (state as LocationsError).error);
                     }
 
                     throw Exception(
-                        "Locations state must be one of: Loading, Fetched or Error");
+                        "Locations state must be one of: Loading, Fetched or Error, but found: ${state.runtimeType.toString()}");
                   },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
