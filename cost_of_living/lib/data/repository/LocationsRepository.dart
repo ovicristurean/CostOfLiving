@@ -1,7 +1,7 @@
-import 'package:cost_of_living/domain/model/location_model.dart';
+import 'package:cost_of_living/data/response/LocationsResponse.dart';
 
 import '../model/location.dart';
 
 abstract class LocationsRepository {
-  Future<List<LocationModel>> getLocations();
+  Future<LocationsResponse> getLocations();
 }

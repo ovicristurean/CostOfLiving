@@ -18,36 +18,41 @@ class HomeScreen extends StatelessWidget {
             LocationsBloc(context.read<LocationsRepositoryImpl>()),
         child: Container(
           color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "List of locations",
-                textAlign: TextAlign.center,
-              ),
-              BlocBuilder<LocationsBloc, LocationsState>(
-                builder: (context, state) {
-                  switch (state.runtimeType) {
-                    case LocationsFetched:
-                      {
-                        return LocationsList(
-                            elements: (state as LocationsFetched).locations);
-                      }
-                    case LocationsLoading:
-                      {
-                        BlocProvider.of<LocationsBloc>(context)
-                            .requestLocations();
-                        return const Text("Locations loading");
-                      }
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  "List of locations",
+                  textAlign: TextAlign.center,
+                ),
+                BlocBuilder<LocationsBloc, LocationsState>(
+                  builder: (context, state) {
+                    switch (state.runtimeType) {
+                      case LocationsFetched:
+                        {
+                          return LocationsList(
+                              elements: (state as LocationsFetched).locations);
+                        }
+                      case LocationsLoading:
+                        {
+                          BlocProvider.of<LocationsBloc>(context)
+                              .requestLocations();
+                          return const Text("Locations loading");
+                        }
 
-                    default:
-                      {
-                        return const Text("Unsupported state");
-                      }
-                  }
-                },
-              ),
-            ],
+                      case LocationsError:
+                        {
+                          return Text((state as LocationsError).error);
+                        }
+                    }
+
+                    throw Exception(
+                        "Locations state must be one of: Loading, Fetched or Error");
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

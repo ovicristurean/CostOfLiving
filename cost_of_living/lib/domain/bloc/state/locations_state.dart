@@ -12,4 +12,8 @@ class LocationsFetched extends LocationsState {
   LocationsFetched({required this.locations});
 }
 
-class LocationsError extends LocationsState {}
+class LocationsError extends LocationsState {
+  final String error;
+
+  LocationsError(this.error);
+}

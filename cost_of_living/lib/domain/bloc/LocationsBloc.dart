@@ -1,4 +1,5 @@
 import 'package:cost_of_living/data/repository/LocationsRepository.dart';
+import 'package:cost_of_living/data/response/LocationsResponse.dart';
 import 'package:cost_of_living/domain/bloc/state/locations_state.dart';
 import 'package:cost_of_living/presentation/model/location_view_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +12,23 @@ class LocationsBloc extends Cubit<LocationsState> {
   void requestLocations() {
     emit(LocationsLoading());
 
-    Future.delayed(const Duration(seconds: 2), () {
-      locationsRepository.getLocations().then((locations) =>
-          emit(LocationsFetched(locations: toViewDataList(locations))));
+    locationsRepository.getLocations().then((locationsResponse) {
+      switch (locationsResponse.runtimeType) {
+        case LocationsSuccessResponse:
+          {
+            emit(LocationsFetched(
+                locations: toViewDataList(
+                    (locationsResponse as LocationsSuccessResponse)
+                        .locationsDto
+                        .locations)));
+          }
+          break;
+
+        case LocationsErrorResponse:
+          {
+            emit(LocationsError("Locations API is currrently unavailable"));
+          }
+      }
     });
   }
 }

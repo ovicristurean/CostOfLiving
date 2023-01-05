@@ -1,4 +1,4 @@
-import 'package:cost_of_living/domain/model/location_model.dart';
+import '../../data/model/location.dart';
 
 class LocationViewData {
   final String cityName;
@@ -49,8 +49,8 @@ class LocationViewData {
   }
 }
 
-List<LocationViewData> toViewDataList(List<LocationModel> locationModels) =>
-    locationModels.map((e) => toViewData(e)).toList();
+List<LocationViewData> toViewDataList(List<Location> locations) =>
+    locations.map((e) => toViewData(e)).toList();
 
-LocationViewData toViewData(LocationModel locationModel) => LocationViewData(
-    cityName: locationModel.cityName, countryName: locationModel.countryName);
+LocationViewData toViewData(Location location) => LocationViewData(
+    cityName: location.cityName, countryName: location.countryName);
