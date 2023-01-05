@@ -1,3 +1,4 @@
+import 'package:cost_of_living/presentation/router/app_router.dart';
 import 'package:cost_of_living/presentation/screens/home_screen.dart';
 import 'package:cost_of_living/ui_util/theme.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -18,6 +19,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
     ));
 
+    final AppRouter appRouter = AppRouter();
+
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) =>
           ThemeProvider(
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
                 theme: theme.light(settings.value.sourceColor),
                 darkTheme: theme.dark(settings.value.sourceColor),
                 themeMode: theme.themeMode(),
+                onGenerateRoute: appRouter.onGenerateRoute,
                 home: const MyHomePage(title: 'Flutter Demo Home Page'),
               );
             }),

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 
 class LocationsList extends StatelessWidget {
   final List<LocationViewData> elements;
+  final VoidCallback onLocationClicked;
 
-  const LocationsList({Key? key, required this.elements}) : super(key: key);
+  const LocationsList(
+      {Key? key, required this.elements, required this.onLocationClicked})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,10 @@ class LocationsList extends StatelessWidget {
         itemCount: elements.length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return LocationItem(location: elements[index]);
+          return LocationItem(
+            location: elements[index],
+            onItemClicked: () => onLocationClicked(),
+          );
         },
       ),
     );

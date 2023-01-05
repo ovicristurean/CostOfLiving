@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 
 class LocationItem extends StatefulWidget {
   final LocationViewData location;
+  final VoidCallback onItemClicked;
 
-  const LocationItem({Key? key, required this.location}) : super(key: key);
+  const LocationItem(
+      {Key? key, required this.location, required, required this.onItemClicked})
+      : super(key: key);
 
   @override
   State<LocationItem> createState() => _LocationItemState();
@@ -13,14 +16,17 @@ class LocationItem extends StatefulWidget {
 class _LocationItemState extends State<LocationItem> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      child: SizedBox(
-        width: 300,
-        height: 100,
-        child: Center(
-            child: Text(
-                "${widget.location.countryName} ${widget.location.cityName}")),
+    return GestureDetector(
+      onTap: () => widget.onItemClicked(),
+      child: Card(
+        elevation: 0,
+        child: SizedBox(
+          width: 300,
+          height: 100,
+          child: Center(
+              child: Text(
+                  "${widget.location.countryName} ${widget.location.cityName}")),
+        ),
       ),
     );
   }

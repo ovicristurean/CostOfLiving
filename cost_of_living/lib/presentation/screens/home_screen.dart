@@ -34,7 +34,11 @@ class HomeScreen extends StatelessWidget {
                       case LocationsFetched:
                         {
                           return LocationsList(
-                              elements: (state as LocationsFetched).locations);
+                            elements: (state as LocationsFetched).locations,
+                            onLocationClicked: () {
+                              Navigator.of(context).pushNamed('/details');
+                            },
+                          );
                         }
                       case LocationsLoading:
                         {
