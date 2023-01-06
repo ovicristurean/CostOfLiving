@@ -1,5 +1,6 @@
 import 'package:cost_of_living/presentation/router/app_router.dart';
 import 'package:cost_of_living/presentation/screens/home_screen.dart';
+import 'package:cost_of_living/presentation/widgets/bottom_nav_bar.dart';
 import 'package:cost_of_living/ui_util/theme.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,10 @@ class MyApp extends StatelessWidget {
                 darkTheme: theme.dark(settings.value.sourceColor),
                 themeMode: theme.themeMode(),
                 onGenerateRoute: appRouter.onGenerateRoute,
-                home: const MyHomePage(title: 'Flutter Demo Home Page'),
+                home: const Scaffold(
+                  body: MyHomePage(title: 'Flutter Demo Home Page'),
+                  bottomNavigationBar: AppBottomNavigationBar(),
+                ),
               );
             }),
       ),

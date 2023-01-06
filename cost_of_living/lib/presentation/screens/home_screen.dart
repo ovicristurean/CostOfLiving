@@ -1,5 +1,6 @@
 import 'package:cost_of_living/domain/bloc/LocationsBloc.dart';
 import 'package:cost_of_living/domain/bloc/state/locations_state.dart';
+import 'package:cost_of_living/presentation/widgets/bottom_nav_bar.dart';
 import 'package:cost_of_living/presentation/widgets/location_list_header.dart';
 import 'package:cost_of_living/presentation/widgets/locations_error_view.dart';
 import 'package:cost_of_living/presentation/widgets/locations_list.dart';
