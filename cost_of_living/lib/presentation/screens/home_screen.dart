@@ -1,5 +1,6 @@
 import 'package:cost_of_living/domain/bloc/LocationsBloc.dart';
 import 'package:cost_of_living/domain/bloc/state/locations_state.dart';
+import 'package:cost_of_living/presentation/widgets/location_list_header.dart';
 import 'package:cost_of_living/presentation/widgets/locations_error_view.dart';
 import 'package:cost_of_living/presentation/widgets/locations_list.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "List of locations",
-                textAlign: TextAlign.center,
-              ),
+              const LocationsHeader(),
               Expanded(
                 child: BlocBuilder<LocationsBloc, LocationsState>(
                   builder: (context, state) {

@@ -18,14 +18,16 @@ class _LocationItemState extends State<LocationItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => widget.onItemClicked(),
-      child: Card(
-        elevation: 0,
-        child: SizedBox(
-          width: 300,
-          height: 100,
-          child: Center(
-              child: Text(
-                  "${widget.location.countryName} ${widget.location.cityName}")),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          elevation: 0,
+          child: Container(
+            height: 80,
+            child: Center(
+                child: Text(
+                    "${widget.location.countryName} ${widget.location.cityName}")),
+          ),
         ),
       ),
     );
