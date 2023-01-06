@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 class LocationDetailsScreen extends StatelessWidget {
-  const LocationDetailsScreen({Key? key}) : super(key: key);
+  final Color color;
+
+  const LocationDetailsScreen({Key? key, required this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Center(
-        child: Text("Details"),
+    return SafeArea(
+      child: Container(
+        color: color,
+        child: const Center(
+          child: Text("Details"),
+        ),
       ),
     );
   }

@@ -12,7 +12,7 @@ class AppRouter {
         );
       case '/details':
         return MaterialPageRoute(
-          builder: (_) => const LocationDetailsScreen(),
+          builder: (_) => const LocationDetailsScreen(color: Colors.yellow),
         );
       default:
         return null;

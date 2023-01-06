@@ -44,9 +44,9 @@ class _HomepageScreenState extends State<HomepageScreen> {
                 onGenerateRoute: appRouter.onGenerateRoute,
                 home: Scaffold(
                   body: <Widget>[
-                    HomeScreen(),
-                    LocationDetailsScreen(),
-                    LocationDetailsScreen(),
+                    const HomeScreen(),
+                    const LocationDetailsScreen(color: Colors.green),
+                    const LocationDetailsScreen(color:Colors.yellow),
                   ][selectedIndex],
                   //HomeScreen(),
                   bottomNavigationBar: AppBottomNavigationBar(
