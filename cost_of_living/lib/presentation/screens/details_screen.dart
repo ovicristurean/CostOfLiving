@@ -5,8 +5,10 @@ class LocationDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Details"),
+    return const SafeArea(
+      child: Center(
+        child: Text("Details"),
+      ),
     );
   }
 }

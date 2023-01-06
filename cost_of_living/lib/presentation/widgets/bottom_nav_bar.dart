@@ -1,33 +1,43 @@
 import 'package:flutter/material.dart';
 
-import 'waterfall_notched_rectangle.dart';
+class AppBottomNavigationBar extends StatefulWidget {
+  final ValueChanged<int> onPageSelected;
 
-class AppBottomNavigationBar extends StatelessWidget {
-  const AppBottomNavigationBar({Key? key}) : super(key: key);
+  const AppBottomNavigationBar({Key? key, required this.onPageSelected})
+      : super(key: key);
+
+  @override
+  State<AppBottomNavigationBar> createState() => _AppBottomNavigationBarState();
+}
+
+class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      notchMargin: 6,
-      shape: WaterfallNotchedRectangle(),
-      child: Container(
-        color: Colors.transparent,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              child: Text("Locations"),
-              onTap: () {
-                Navigator.of(context).pushNamed('/details');
-              },
-            ),
-            Text("TODO"),
-            Text("TODO"),
-          ],
+    return NavigationBar(
+      onDestinationSelected: (int index) {
+        setState(() {
+          currentPageIndex = index;
+          widget.onPageSelected(index);
+        });
+      },
+      selectedIndex: currentPageIndex,
+      destinations: const <Widget>[
+        NavigationDestination(
+          icon: Icon(Icons.explore),
+          label: 'Locations',
         ),
-      ),
+        NavigationDestination(
+          icon: Icon(Icons.commute),
+          label: 'TODO',
+        ),
+        NavigationDestination(
+          selectedIcon: Icon(Icons.bookmark),
+          icon: Icon(Icons.bookmark_border),
+          label: 'TODO',
+        ),
+      ],
     );
   }
 }
