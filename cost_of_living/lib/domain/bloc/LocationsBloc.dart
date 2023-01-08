@@ -7,7 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LocationsBloc extends Cubit<LocationsState> {
   LocationsRepository locationsRepository;
 
-  LocationsBloc(this.locationsRepository) : super(LocationsLoading());
+  LocationsBloc(this.locationsRepository) : super(LocationsLoading()) {
+    requestLocations();
+  }
 
   void requestLocations() {
     emit(LocationsLoading());
@@ -26,7 +28,8 @@ class LocationsBloc extends Cubit<LocationsState> {
 
         case LocationsErrorResponse:
           {
-            emit(LocationsError("Locations API is currrently unavailable"));
+            emit(LocationsError(
+                "Locations unavailable because: ${(locationsResponse as LocationsErrorResponse).message}"));
           }
       }
     });

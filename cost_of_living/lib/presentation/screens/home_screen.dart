@@ -1,6 +1,5 @@
 import 'package:cost_of_living/domain/bloc/LocationsBloc.dart';
 import 'package:cost_of_living/domain/bloc/state/locations_state.dart';
-import 'package:cost_of_living/presentation/widgets/bottom_nav_bar.dart';
 import 'package:cost_of_living/presentation/widgets/location_list_header.dart';
 import 'package:cost_of_living/presentation/widgets/locations_error_view.dart';
 import 'package:cost_of_living/presentation/widgets/locations_list.dart';
@@ -10,9 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/repository/LocationsRepositoryImpl.dart';
 import '../widgets/locations_loading_view.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
@@ -41,8 +45,6 @@ class HomeScreen extends StatelessWidget {
                         }
                       case LocationsLoading:
                         {
-                          BlocProvider.of<LocationsBloc>(context)
-                              .requestLocations();
                           return const LocationsLoadingView(
                               message: "Loading locations");
                         }

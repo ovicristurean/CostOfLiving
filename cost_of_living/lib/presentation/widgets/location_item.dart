@@ -21,6 +21,7 @@ class _LocationItemState extends State<LocationItem> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
+          color: Theme.of(context).primaryColor,
           elevation: 0,
           child: Container(
             height: 80,

@@ -7,33 +7,36 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
+import 'colors.dart';
+
 class NoAnimationPageTransitionsBuilder extends PageTransitionsBuilder {
   const NoAnimationPageTransitionsBuilder();
 
   @override
   Widget buildTransitions<T>(
-      PageRoute<T> route,
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      Widget child,
-      ) {
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     return child;
   }
 }
 
 class ThemeSettingChange extends Notification {
   ThemeSettingChange({required this.settings});
+
   final ThemeSettings settings;
 }
 
 class ThemeProvider extends InheritedWidget {
   const ThemeProvider(
       {super.key,
-        required this.settings,
-        required this.lightDynamic,
-        required this.darkDynamic,
-        required super.child});
+      required this.settings,
+      required this.lightDynamic,
+      required this.darkDynamic,
+      required super.child});
 
   final ValueNotifier<ThemeSettings> settings;
   final ColorScheme? lightDynamic;
@@ -81,8 +84,8 @@ class ThemeProvider extends InheritedWidget {
   }
 
   ShapeBorder get shapeMedium => RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(8),
-  );
+        borderRadius: BorderRadius.circular(8),
+      );
 
   CardTheme cardTheme() {
     return CardTheme(
@@ -151,7 +154,12 @@ class ThemeProvider extends InheritedWidget {
   }
 
   ThemeData light([Color? targetColor]) {
-    final colorScheme = colors(Brightness.light, targetColor);
+    final colorScheme = ThemeData.light().colorScheme.copyWith(
+          primary: pink100,
+          onPrimary: brown900,
+          secondary: brown900,
+          error: errorRed,
+        );
     return ThemeData.light().copyWith(
       pageTransitionsTheme: pageTransitionsTheme,
       colorScheme: colorScheme,
@@ -169,7 +177,12 @@ class ThemeProvider extends InheritedWidget {
   }
 
   ThemeData dark([Color? targetColor]) {
-    final colorScheme = colors(Brightness.dark, targetColor);
+    final colorScheme = ThemeData.light().colorScheme.copyWith(
+      primary: pink100,
+      onPrimary: brown900,
+      secondary: brown900,
+      error: errorRed,
+    );
     return ThemeData.dark().copyWith(
       pageTransitionsTheme: pageTransitionsTheme,
       colorScheme: colorScheme,
